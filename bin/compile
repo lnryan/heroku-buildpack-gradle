@@ -53,12 +53,18 @@ export GRADLE_OPTS=${GRADLE_OPTS-"-Dorg.gradle.daemon=false -Dorg.gradle.interna
 mkdir -p "$CACHE_DIR/.gradle"
 export GRADLE_USER_HOME=${GRADLE_USER_HOME:-$CACHE_DIR/.gradle}
 
+echo "Build Dir is $BUILD_DIR"
+ls $BUILD_DIR
+echo "Cache Dir is $CACHE_DIR"
+ls $CACHE_DIR
+
+
 create_project_cache_symlink "$CACHE_DIR" "$BUILD_DIR"
 
 if [ ! -f $BUILD_DIR/gradlew ] ; then
   mcount "wrapperless"
   echo "-----> Installing Gradle Wrapper..."
-  echo "       WARNING: Your application does not have it's own gradlew file."
+  echo "       WARNING: This script has fucked up again"
   echo "       We'll install one for you, but this is a deprecated feature and"
   echo "       in the future may not be supported."
   cp -rn ${OPT_DIR}/wrapper/* ${BUILD_DIR}
